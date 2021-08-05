@@ -60,7 +60,7 @@ export class WifiComponent implements OnInit {
 
   createNewItem(){
     this.wifiData.add(this.newWifi);
-    this.itemListService.update(2);
+    this.itemListService.update(1);
     this.showSuccessToast();
   }
 

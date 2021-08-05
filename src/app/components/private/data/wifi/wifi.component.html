@@ -114,7 +114,7 @@
 </button>
 
 <ng-template #dialog let-data let-ref="dialogRef">
-  <form [formGroup]="newItem" (ngSubmit)="createNewItem()">
+  <form [formGroup]="newItem" (ngSubmit)="createNewItem(); ref.close() ">
     <nb-card style="max-width: 95vw; max-height: 95vh">
       <nb-card-header>Novo wifi</nb-card-header>
       <nb-card-body>

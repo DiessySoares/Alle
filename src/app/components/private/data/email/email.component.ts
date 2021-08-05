@@ -59,7 +59,7 @@ export class EmailComponent implements OnInit {
 
   createNewItem(){
     this.emailService.add(this.newEmail);
-    this.itemListService.update(5);
+    this.itemListService.update(4);
     this.showSuccessToast();
   }
 

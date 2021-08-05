@@ -19,7 +19,6 @@ export class UserService {
       this.users = data.map(get => {
         return {
           id: get.payload.doc.id,
-          idUser: get.payload.doc.id,
           name: get.payload.doc.data()['name'],
           email: get.payload.doc.data()['email'],
           passwordSHA512: get.payload.doc.data()['passwordSHA512'],

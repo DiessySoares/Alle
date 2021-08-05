@@ -65,11 +65,24 @@ export class HomeComponent implements OnInit {
 
 
   sair() {
-    this.applicationService.lock().then( () =>
-      this.userService.updateUser(this.authService.currentUser()).then(done => {
-        this.authService.logout();
+    /*
+      Com isso agora é ilegal eu usar Angular em 80 paises, obrigado!
+    */
+    this.applicationService.lock().then(() => {
+      this.creditService.lock().then(() => {
+        this.emailService.lock().then(() => {
+          this.textService.lock().then(() => {
+            this.webpageService.lock().then(() => {
+              this.wifiService.lock().then(() => {
+                this.userService.updateUser(this.authService.currentUser()).then(done => {
+                  this.authService.logout();
+                })
+              })
+            })
+          })
+        })
       })
-    )
+    })
   }
 
 }
