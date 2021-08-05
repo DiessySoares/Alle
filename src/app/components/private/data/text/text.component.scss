@@ -1,0 +1,28 @@
+.title {
+    font-size: large;
+    text-decoration: solid;
+  }
+  
+  hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .itens {
+    width: 50%;
+    overflow: scroll;
+    background-color: rgba(199, 199, 199, 0.1);
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    max-height: 200px;
+  }
+  
+  ::ng-deep .strength-meter {
+    height: 2px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+  
+  .bottom {
+    display: flex; 
+  }

@@ -1,0 +1,95 @@
+
+<ion-grid style="height: 100%; margin: 0px;">
+
+  <ion-row>
+    <ion-col>
+      <ion-row>
+
+        <ion-col style="padding: 0px;">
+
+          <h6 style="color: rgb(181, 181, 181);">Pesquisar item</h6>
+          
+          <nb-form-field>
+            <input 
+                [(ngModel)]="querry"
+                fullWidth 
+                nbInput
+            >
+            <button nbSuffix nbButton ghost (click)="search()">
+                <nb-icon [icon]="'search-outline'" pack="eva">
+                </nb-icon>
+            </button>
+        </nb-form-field>
+
+
+
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <nb-card style="height: 85% !important; margin-bottom: 10px !important">
+        <nb-list style="height: 100px !important;">
+          
+          <nb-list-item *ngFor="let item of searchArray" (click)="select(item)">
+              {{item.name}}
+          </nb-list-item>
+
+        </nb-list>
+      </nb-card>
+      
+    </ion-col>
+  </ion-row>
+
+
+
+
+</ion-grid>
+
+<ion-footer>
+
+  <ion-item-divider>
+
+    <div class="container" style="width: 100%;">
+      <div class="cell-row cell-row-1" *ngFor="let number of [0, 1];index as i">
+
+        <div class="cell-1" *ngFor="let innernumber of [0, 1, 2];index as j;">
+          <div [routerLink]="['/item-page', (i + j + j) + 1]">
+            <nb-icon style="font-size: 10vw" icon="{{types[i + j + j].typ_icon}}"
+              [options]="{ animation: { type: 'pulse' } }" status="primary"></nb-icon>
+            <div style="font-size: 12px;">{{types[i + j + j].typ_name}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </ion-item-divider>
+
+  <ion-item-divider>
+
+    <ion-grid style="width: 100%">
+
+      <ion-row>
+
+        <ion-col>
+          <nb-icon (click)="sair()" icon="log-out-outline" style="float: left; font-size: 6vw" status="danger">
+          </nb-icon>
+        </ion-col>
+
+
+        <ion-col>
+          <nb-icon icon="settings-outline" style="float: right; font-size: 6vw"></nb-icon>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+  </ion-item-divider>
+
+
+
+</ion-footer>

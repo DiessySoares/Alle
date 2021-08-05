@@ -1,0 +1,134 @@
+<ion-row style="height: 50%;">
+
+  <ion-col *ngIf="selected != null">
+    <!-- wifi -->
+    <div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="title">
+            Titulo: {{selected.name}}
+          </ion-col>
+          <ion-col size="2">
+            <nb-icon icon="edit-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+          </ion-col>
+          <ion-col size="2">
+            <nb-icon icon="trash-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <hr />
+
+
+
+      <ion-row>
+        <!-- password/key -->
+        <ion-col size="4" class="bottom">
+          Texto:
+        </ion-col>
+        <ion-col size="7">
+          <ion-row>
+            <ion-col class="itens">
+
+              {{showTxt? selected.text : '*'.repeat(selected.text?.length)}}
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="1">
+          <nb-icon icon="{{showTxt? 'eye-off-outline': 'eye-outline'}}" style="margin-top: 5px;" (click)="showText()">
+          </nb-icon>
+        </ion-col>
+      </ion-row>
+
+
+    </div>
+  </ion-col> 
+
+  <!-------------- skeleton -------------->
+  <div *ngIf="selected == null" style="width: 100%;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <hr />
+    <ion-grid style="padding: 0px;">
+      <ion-row>
+        <ion-col size="4">
+          <ion-skeleton-text style="height: 20px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="7">
+          <ion-skeleton-text style="height: 100px ;"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-row>
+
+
+
+<button nbButton fullWidth outline status="primary" size="small" style="font-size: 10px;" (click)="open(dialog)">
+  <nb-icon icon="plus-outline" status="primary">
+  </nb-icon>
+  Adicionar novo
+</button>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <form [formGroup]="newItem" (ngSubmit)="createNewItem()">
+    <nb-card style="max-width: 95vw; max-height: 95vh">
+      <nb-card-header>Novo wifi</nb-card-header>
+      <nb-card-body>
+
+        <ion-grid style="width: 100%; padding: 0px">
+
+          <ion-row>
+            <ion-col>
+              <div class="label">nome do texto</div>
+              <input type="text" [(ngModel)]="newText.name" nbInput fullWidth formControlName="name"
+                status="{{getInputStatus('name')}}">
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div class="label">Texto</div>
+              <textarea type="text" [(ngModel)]="newText.text" nbInput fullWidth formControlName="text"
+                status="{{getInputStatus('text')}}"></textarea>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+      </nb-card-body>
+      <nb-card-footer>
+
+        <ion-grid style="width: 100%;">
+
+          <ion-row>
+            <ion-col>
+              <button nbButton fullWidth size="small" (click)="ref.close()">Voltar</button>
+            </ion-col>
+            <ion-col>
+              <button nbButton fullWidth size="small" [disabled]="!newItem.valid" type="submit"
+                status="primary">Criar</button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+      </nb-card-footer>
+    </nb-card>
+  </form>
+</ng-template>

@@ -1,0 +1,151 @@
+<ion-row style="height: 50%;" >
+
+  <ion-col *ngIf="selected != null">
+    <!-- wifi -->
+    <div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col class="title">
+            Usuario: {{selected.name}}
+          </ion-col>
+          <ion-col size="2">
+            <nb-icon icon="edit-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+          </ion-col>
+          <ion-col size="2">
+            <nb-icon icon="trash-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <hr />
+
+      <ion-row>
+        <ion-col size="4">
+          Email:
+        </ion-col>
+        <ion-col>
+          {{selected.email}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row><!-- password/key -->
+        <ion-col size="4" class="bottom">
+          Senha:
+        </ion-col>
+        <ion-col size="7">
+          <ion-row>
+            <ion-col class="itens">
+
+              {{showPasswod? selected.password : '*'.repeat(selected.password.length)}}
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="padding: 0px !important; margin: 0px !important;">
+              <password-strength-meter [password]="selected.password" ></password-strength-meter>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="1">
+          <nb-icon icon="{{showPasswod? 'eye-off-outline': 'eye-outline'}}" style="margin-top: 5px;" (click)="showPassword()"></nb-icon>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </ion-col>
+
+    <!-------------- skeleton -------------->
+  <div *ngIf="selected == null" style="width: 100%;">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-skeleton-text style="height: 22px;"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <hr />
+    <ion-grid style="padding: 0px;" *ngFor="let item of [1, 2, 3, 4]">
+      <ion-row>
+        <ion-col size="6">
+          <ion-skeleton-text style="height: 20px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-skeleton-text style="height: 20px;"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-row>
+
+
+<button nbButton fullWidth outline status="primary" size="small" style="font-size: 10px;" (click)="open(dialog)">
+  <nb-icon icon="plus-outline" status="primary">
+  </nb-icon>
+  Adicionar novo
+</button>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <form [formGroup]="newItem" (ngSubmit)="createNewItem()">
+    <nb-card style="max-width: 95vw; max-height: 95vh">
+      <nb-card-header>Novo email</nb-card-header>
+      <nb-card-body>
+
+        <ion-grid style="width: 100%; padding: 0px">
+
+          <ion-row>
+            <ion-col>
+              <div class="label">email</div>
+              <input type="text" [(ngModel)]="newEmail.email" nbInput fullWidth formControlName="email"
+                status="{{getInputStatus('email')}}">
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div class="label">senha</div>
+              <nb-form-field>
+                <input [type]="getInputType()" [(ngModel)]="newEmail.password" fullWidth nbInput
+                  formControlName="password" status="{{getInputStatus('password')}}">
+                <button type="button" nbSuffix nbButton ghost (click)="showNewKey = !showNewKey">
+                  <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                    [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                  </nb-icon>
+                </button>
+                <password-strength-meter [password]="newEmail.password"></password-strength-meter>
+              </nb-form-field>
+
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+      </nb-card-body>
+      <nb-card-footer>
+
+        <ion-grid style="width: 100%;">
+
+          <ion-row>
+            <ion-col>
+              <button nbButton fullWidth size="small" (click)="ref.close()">Voltar</button>
+            </ion-col>
+            <ion-col>
+              <button nbButton fullWidth size="small" [disabled]="!newItem.valid" type="submit"
+                status="primary">Criar</button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+      </nb-card-footer>
+    </nb-card>
+  </form>
+</ng-template>
