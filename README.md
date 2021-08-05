@@ -2,7 +2,7 @@
 
 ## Dependencias 
 
-Node 14.17.0
+Node 16+
 
 - Ionic:
 
@@ -22,6 +22,10 @@ Na pasta do projeto execute o comando no terminal
 
 ```
 npm i
+```
+
+```
+npm install -g ionic
 ```
 
 ## Run
