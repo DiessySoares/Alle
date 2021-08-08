@@ -1,53 +1,63 @@
+<ion-content>
+  <ion-grid style="height: 100%; margin: 0px;">
 
-<ion-grid style="height: 100%; margin: 0px;">
 
-  <ion-row>
-    <ion-col>
-      <ion-row>
-
-        <ion-col style="padding: 0px;">
-
-          <h6 style="color: rgb(181, 181, 181);">Pesquisar item</h6>
-          
-          <nb-form-field>
-            <input 
-                [(ngModel)]="querry"
-                fullWidth 
-                nbInput
-            >
-            <button nbSuffix nbButton ghost (click)="search()">
-                <nb-icon [icon]="'search-outline'" pack="eva">
-                </nb-icon>
-            </button>
-        </nb-form-field>
+    <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%;">
+        <ion-row>
+          <ion-col style="text-align: center;">
+            HOME
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+    
 
 
 
-        </ion-col>
-      </ion-row>
+    <ion-row *ngFor="let number of [0, 1, 2];index as i">
 
-    </ion-col>
-  </ion-row>
+      <ion-col *ngFor="let innernumber of [0, 1];index as j;">
 
-  <ion-row>
-    <ion-col>
-      <nb-card style="height: 85% !important; margin-bottom: 10px !important">
-        <nb-list style="height: 100px !important;">
-          
-          <nb-list-item *ngFor="let item of searchArray" (click)="select(item)">
-              {{item.name}}
-          </nb-list-item>
-
-        </nb-list>
-      </nb-card>
-      
-    </ion-col>
-  </ion-row>
+        <nb-card style="margin-bottom: 5px; background-color: #121212;">
+          <nb-card-body style="padding: 1vh;">
 
 
+            <ion-grid style=" width: 100%; ">
+              <ion-row>
+
+                <ion-col size="10">
+                  <div class="subtitle" style="font-size: 12px;">{{types[i + i + j].typ_name}}</div>
+                </ion-col>
+
+                <ion-col size="2">
+                  <nb-icon style="font-size: 7vw; float: right;" icon="{{types[i + i + j].typ_icon}}" status="basic">
+                  </nb-icon>
+                </ion-col>
+
+              </ion-row>
+
+              <ion-row>
+
+                <ion-col style="font-size: small;">
+                  {{types[i + i + j].size}} Itens
+                </ion-col>
+
+              </ion-row>
+
+            </ion-grid>
+
+          </nb-card-body>
+        </nb-card>
+
+      </ion-col>
+
+    </ion-row>
 
 
-</ion-grid>
+
+
+  </ion-grid>
+
+</ion-content>
 
 <ion-footer>
 
@@ -76,12 +86,16 @@
       <ion-row>
 
         <ion-col>
-          <nb-icon (click)="sair()" icon="log-out-outline" style="float: left; font-size: 6vw" status="danger">
-          </nb-icon>
+
+          <button (click)="sair()" outline nbButton status="basic" size="tiny" style="float: left">
+            <nb-icon icon="log-out-outline" status="danger"></nb-icon>Salvar e sair
+          </button>
+
         </ion-col>
 
 
         <ion-col>
+
           <nb-icon icon="settings-outline" style="float: right; font-size: 6vw"></nb-icon>
         </ion-col>
 

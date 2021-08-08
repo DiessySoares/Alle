@@ -19,10 +19,12 @@ export class WebpageComponent implements OnInit {
 
   showPasswod: boolean = false;
   showNewKey: boolean = false;
+
+  isUpdate = false;
   
   public newItem: FormGroup;
 
-  constructor(private webData: WebpageService, private itemListService: ItemListService,   private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
+  constructor(private WebService: WebpageService, private itemListService: ItemListService,   private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.initForms();
@@ -41,8 +43,27 @@ export class WebpageComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
+
+  open(dialog: TemplateRef<any>, updateObject) {
+    this.newItem.reset();
+
+    if (updateObject == null) {
+      this.newWeb = {} as WebData;
+      this.isUpdate = false;
+    } else {
+      this.newWeb = updateObject;
+      this.isUpdate = true;
+    }
+
     this.dialogService.open(dialog);
+  }
+
+  
+  removeItem(item: WebData) {
+    this.WebService.delete(item.id);
+    this.itemListService.update(2);
+    this.showSuccessToast("Item removido!");
+    this.selected = null;
   }
 
   getInputStatus(formItem: string) {
@@ -56,21 +77,29 @@ export class WebpageComponent implements OnInit {
     return 'password';
   }
 
-  createNewItem(){
-    this.webData.add(this.newWeb);
+
+  handleItem() {
+    if (!this.isUpdate) {
+      this.WebService.add(Object.assign({}, this.newWeb));
+    } else {
+      this.WebService.update(Object.assign({}, this.newWeb));
+    }
+
     this.itemListService.update(2);
-    this.showSuccessToast();
+    this.showSuccessToast(this.isUpdate ? 'Item atualizado' : 'Item inserido');
   }
 
-  showSuccessToast() {
-    this.toastrService.show('Sua conta foi criada!',
+
+  showSuccessToast(msg) {
+    this.toastrService.show(msg,
       'Sucesso!',
       {
         status: 'success',
-        position: <any> 'top-right',
-        duration: <any> '3000'
+        position: <any>'top-right',
+        duration: <any>'3000'
       });
   }
+
 
   showErrorToast() {
     this.toastrService.show('Esse nome já foi usado!',

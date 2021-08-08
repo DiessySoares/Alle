@@ -7,7 +7,8 @@ import {
   NbFormFieldModule,
   NbIconModule,
   NbInputModule,
-  NbListModule
+  NbListModule,
+  NbSelectModule
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -29,6 +30,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     NbInputModule,
     NbFormFieldModule,
     NbListModule,
+    NbSelectModule,
 
     PasswordStrengthMeterModule,
 

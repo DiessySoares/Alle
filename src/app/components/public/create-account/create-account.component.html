@@ -1,74 +1,58 @@
+<ion-content>
+    <form [formGroup]="usrForm" (ngSubmit)="createAccount()">
+        <ion-grid style="width: 100%;">
 
-<form [formGroup]="usrForm" (ngSubmit)="createAccount()">
-<ion-grid style="width: 100%;">
-
-    <ion-row style="height: 25%; padding-top: 20%;">
-        <ion-col>
-            <ion-title class="ion-text-center">
-                Criar  conta
-            </ion-title>
-        </ion-col>
-    </ion-row>
+            <ion-row style="height: 25%; padding-top: 20%;">
+                <ion-col>
+                    <ion-title class="ion-text-center">
+                        Criar conta
+                    </ion-title>
+                </ion-col>
+            </ion-row>
 
 
-    <ion-row>
-        <ion-col>
-            <div class="label">usuario</div>
-            <input 
-            [(ngModel)]="newUser.name"
-            type="text" 
-            nbInput 
-            fullWidth
-            formControlName="usrName"
-            status="{{getInputStatus('usrName')}}" 
-            >
-        </ion-col>
-    </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="label">usuario</div>
+                    <input [(ngModel)]="newUser.name" type="text" nbInput fullWidth formControlName="usrName"
+                        status="{{getInputStatus('usrName')}}">
+                </ion-col>
+            </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <div class="label">email</div>
-            <input 
-            [(ngModel)]="newUser.email"
-            type="text" 
-            nbInput 
-            fullWidth
-            formControlName="usrEmail"
-            status="{{getInputStatus('usrEmail')}}" 
-            >
-        </ion-col>
-    </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="label">email</div>
+                    <input [(ngModel)]="newUser.email" type="text" nbInput fullWidth formControlName="usrEmail"
+                        status="{{getInputStatus('usrEmail')}}">
+                </ion-col>
+            </ion-row>
 
-    <ion-row>
-        <ion-col>
-            <div class="label">senha</div>
-            <nb-form-field>
-                <input 
-                    [(ngModel)]="newUser.passwordSHA512"
-                    [type]="getInputType()" 
-                    fullWidth 
-                    nbInput
-                    formControlName="usrPassword"
-                    status="{{getInputStatus('usrPassword')}}" 
-                >
-                <button type="button" nbSuffix nbButton ghost (click)="toggleShowPassword()">
-                    <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
-                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
-                    </nb-icon>
-                </button>
-            </nb-form-field>
-            <password-strength-meter [password]="newUser.passwordSHA512" ></password-strength-meter>
-        </ion-col>
-    </ion-row>
+            <ion-row>
+                <ion-col>
+                    <div class="label">senha</div>
+                    <nb-form-field>
+                        <input [(ngModel)]="newUser.passwordSHA512" [type]="getInputType()" fullWidth nbInput
+                            formControlName="usrPassword" status="{{getInputStatus('usrPassword')}}">
+                        <button type="button" nbSuffix nbButton ghost (click)="toggleShowPassword()">
+                            <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                                [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                            </nb-icon>
+                        </button>
+                    </nb-form-field>
+                    <password-strength-meter [password]="newUser.passwordSHA512"></password-strength-meter>
+                </ion-col>
+            </ion-row>
 
-    <ion-row style="padding-top: 30%;">
-        <ion-col>
-            <button routerLink="/login" nbButton fullWidth size="small">Voltar</button>
-        </ion-col>
-        <ion-col>
-            <button  nbButton fullWidth size="small" status="primary" [disabled]="!usrForm.valid" type="submit">Criar</button>
-        </ion-col>
-    </ion-row>
+            <ion-row style="padding-top: 30%;">
+                <ion-col>
+                    <button routerLink="/login" nbButton fullWidth size="small">Voltar</button>
+                </ion-col>
+                <ion-col>
+                    <button nbButton fullWidth size="small" status="primary" [disabled]="!usrForm.valid"
+                        type="submit">Criar</button>
+                </ion-col>
+            </ion-row>
 
-</ion-grid>
-</form>
+        </ion-grid>
+    </form>
+</ion-content>

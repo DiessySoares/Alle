@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthService } from './service/auth/auth.service'
+
 import { LoginComponent } from './components/public/login/login.component';
 import { CreateAccountComponent } from './components/public/create-account/create-account.component';
 
@@ -15,8 +17,8 @@ const routes: Routes = [
  { path: 'create-account', component: CreateAccountComponent, data: {depth: 2} },
 
  // PRIVATE ------------------
- { path: 'home', component: HomeComponent, /*canActivate: [AuthService]*/ data: {depth: 3} },
- { path: 'item-page/:id', component: ItemPageComponent, data: {depth: 4} },
+ { path: 'home', component: HomeComponent, canActivate: [AuthService], data: {depth: 3} },
+ { path: 'item-page/:id', component: ItemPageComponent, canActivate: [AuthService], data: {depth: 4} },
 
 ];
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmailData } from 'src/app/models/email-data';
+import { EmailData } from './../../models/email-data';
 import { AesService } from '../aes/aes.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -61,7 +61,7 @@ export class EmailService {
   }
 
   getAll() {
-    if (this.authService.isAuthenticated() && !this.locked) {
+    if (this.authService.isAuthenticated()) {
       return this.authService.currentUser().emailData;
     }
     return null;

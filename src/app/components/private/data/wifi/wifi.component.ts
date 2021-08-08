@@ -18,12 +18,14 @@ export class WifiComponent implements OnInit {
 
   @Input() selected: WifiData;
 
+  isUpdate = false;
+
   showPasswod: boolean = false;
   showNewKey: boolean = false;
   
   public newItem: FormGroup;
 
-  constructor(private wifiData: WifiService, private itemListService: ItemListService, private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
+  constructor(private wifiService: WifiService, private itemListService: ItemListService, private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.initForms();
@@ -43,8 +45,26 @@ export class WifiComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
+  open(dialog: TemplateRef<any>, updateObject) {
+    this.newItem.reset();
+
+    if (updateObject == null) {
+      this.newWifi = {} as WifiData;
+      this.isUpdate = false;
+    } else {
+      this.newWifi = updateObject;
+      this.isUpdate = true;
+    }
+
     this.dialogService.open(dialog);
+  }
+
+
+  removeItem(item: WifiData) {
+    this.wifiService.delete(item.id);
+    this.itemListService.update(1);
+    this.showSuccessToast("Item removido!");
+    this.selected = null;
   }
 
   getInputStatus(formItem: string) {
@@ -58,19 +78,25 @@ export class WifiComponent implements OnInit {
     return 'password';
   }
 
-  createNewItem(){
-    this.wifiData.add(this.newWifi);
+  
+  handleItem() {
+    if (!this.isUpdate) {
+      this.wifiService.add(Object.assign({}, this.newWifi));
+    } else {
+      this.wifiService.update(Object.assign({}, this.newWifi));
+    }
+
     this.itemListService.update(1);
-    this.showSuccessToast();
+    this.showSuccessToast(this.isUpdate ? 'Item atualizado' : 'Item inserido');
   }
 
-  showSuccessToast() {
-    this.toastrService.show('Sua conta foi criada!',
+  showSuccessToast(msg) {
+    this.toastrService.show(msg,
       'Sucesso!',
       {
         status: 'success',
-        position: <any> 'top-right',
-        duration: <any> '3000'
+        position: <any>'top-right',
+        duration: <any>'3000'
       });
   }
 
@@ -83,9 +109,5 @@ export class WifiComponent implements OnInit {
         duration: <any> '3000'
       });
   }
-
-  
-
-
 
 }

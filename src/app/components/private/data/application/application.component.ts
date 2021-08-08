@@ -2,10 +2,10 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { AppData } from 'src/app/models/application-data';
+import { AppData } from './../../../../models/application-data';
 
 import { ApplicationService } from './../../../../service/application/application.service'
-import { ItemListService } from 'src/app/service/item-list/item-list.service';
+import { ItemListService } from './../../../../service/item-list/item-list.service';
 
 @Component({
   selector: 'app-application',
@@ -15,17 +15,20 @@ import { ItemListService } from 'src/app/service/item-list/item-list.service';
 export class ApplicationComponent implements OnInit {
 
   
+
   @Input() selected: AppData;
   newApp: AppData = {} as AppData;
 
   showPass: boolean = false;
   showCode: boolean = false;
 
+  isUpdate = false;
+
   public newItem: FormGroup;
   showNewKey: boolean = false;
 
   constructor(private formBuider: FormBuilder, 
-              private toastrService: NbToastrService, 
+              private toastrService: NbToastrService,
               private dialogService: NbDialogService, 
               public navCtrl: NavController, 
               public modalCtrl: ModalController,
@@ -49,7 +52,17 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
+  open(dialog: TemplateRef<any>, updateObject) {
+    this.newItem.reset();
+
+    if(updateObject == null) {
+      this.newApp = {} as AppData;
+      this.isUpdate = false;
+    } else {
+      this.newApp = updateObject;
+      this.isUpdate = true;
+    }
+
     this.dialogService.open(dialog);
   }
 
@@ -57,21 +70,26 @@ export class ApplicationComponent implements OnInit {
     return this.newItem.controls[formItem].dirty && this.newItem.controls[formItem].invalid ? 'danger' : 'basic';
   }
 
-  createNewItem(){
-    this.applicationService.add(this.newApp);
-    this.itemListService.update(5);
-    this.showSuccessToast();
+  handleItem(){
+
+      if(!this.isUpdate) {
+        this.applicationService.add(Object.assign({}, this.newApp));
+      } else {
+        this.applicationService.update(Object.assign({}, this.newApp));
+      }
+
+      this.itemListService.update(5);
+      this.showSuccessToast(this.isUpdate? 'Item atualizado' : 'Item inserido');
+
   }
 
-  showSuccessToast() {
-    this.toastrService.show('Item adicionado!',
-      'Sucesso!',
-      {
-        status: 'success',
-        position: <any> 'top-right',
-        duration: <any> '3000'
-      });
+  removeItem(item: AppData){
+    this.applicationService.delete(item.id);
+    this.itemListService.update(5);
+    this.showSuccessToast("Item removido!");
+    this.selected = null;
   }
+
   
   getInputType() {
     if (this.showNewKey) {
@@ -90,6 +108,26 @@ export class ApplicationComponent implements OnInit {
 
   canActivate(data){
     return data != null;
+  }
+
+  showSuccessToast(msg) {
+    this.toastrService.show(msg,
+      'Sucesso!',
+      {
+        status: 'success',
+        position: <any> 'top-right',
+        duration: <any> '3000'
+      });
+  }
+
+  showErrorToast() {
+    this.toastrService.show('Erro ao inserir item',
+      'Erro!',
+      {
+        status: 'danger',
+        position: <any> 'top-right',
+        duration: <any> '3000'
+      });
   }
 
 }

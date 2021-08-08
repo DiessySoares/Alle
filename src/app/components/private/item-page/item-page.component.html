@@ -1,30 +1,33 @@
-<ion-grid style="width: 100%;">
+<ion-content>
+  <ion-grid style="width: 100%;">
 
-  <app-wifi *ngIf="isWifi()" [selected]='selected'></app-wifi>
-  <app-webpage *ngIf="isWeb()" [selected]='selected'></app-webpage>
-  <app-credit *ngIf="isCredit()" [selected]='selected'></app-credit>
-  <app-email *ngIf="isEmail()" [selected]='selected'></app-email>
-  <app-application *ngIf="isApp()" [selected]='selected'></app-application>
-  <app-text *ngIf="isText()" [selected]='selected'></app-text>
-  
-  <ion-row style="height: 50%">
-    <ion-col style="padding: 0px;padding-top: 2%;">
-      <nb-card style="height: 85% !important; margin-bottom: 10px !important">
-        <nb-list style="height: 100px !important;">
-          
+    <app-wifi *ngIf="isWifi()" [selected]='selected'></app-wifi>
+    <app-webpage *ngIf="isWeb()" [selected]='selected'></app-webpage>
+    <app-credit *ngIf="isCredit()" [selected]='selected'></app-credit>
+    <app-email *ngIf="isEmail()" [selected]='selected'></app-email>
+    <app-application *ngIf="isApp()" [selected]='selected'></app-application>
+    <app-text *ngIf="isText()" [selected]='selected'></app-text>
 
-          <nb-list-item *ngFor="let item of listService.list" (click)="select(item)">
+    <ion-row style="height: 50%">
+      <ion-col style="padding: 0px;padding-top: 2%;">
+        <nb-card style="height: 85% !important; margin-bottom: 10px !important">
+          <nb-list style="height: 55vh !important;">
+
+
+            <nb-list-item *ngFor="let item of listService.list" (click)="select(item)">
               {{item.name}}
-          </nb-list-item>
+            </nb-list-item>
 
-        </nb-list>
-      </nb-card>
-      
-    </ion-col>
-  </ion-row>
+          </nb-list>
+        </nb-card>
+
+      </ion-col>
+    </ion-row>
 
 
-</ion-grid>
+  </ion-grid>
+</ion-content>
+
 
 <ion-footer>
   <ion-item-divider>

@@ -19,16 +19,18 @@ export class TextComponent implements OnInit {
 
   showTxt: boolean = false;
 
+  isUpdate = false;
+
   public newItem: FormGroup;
 
 
-  constructor(private itemListService: ItemListService, private textData: TextService, private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
+  constructor(private itemListService: ItemListService, private textService: TextService, private formBuider: FormBuilder, private toastrService: NbToastrService, private dialogService: NbDialogService, public navCtrl: NavController, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.initForms();
   }
-  
-  
+
+
   private initForms() {
     this.newItem = this.formBuider.group({
       text: ['', Validators.required],
@@ -36,7 +38,18 @@ export class TextComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
+
+  open(dialog: TemplateRef<any>, updateObject) {
+    this.newItem.reset();
+
+    if (updateObject == null) {
+      this.newText = {} as TextData;
+      this.isUpdate = false;
+    } else {
+      this.newText = updateObject;
+      this.isUpdate = true;
+    }
+
     this.dialogService.open(dialog);
   }
 
@@ -44,19 +57,31 @@ export class TextComponent implements OnInit {
     return this.newItem.controls[formItem].dirty && this.newItem.controls[formItem].invalid ? 'danger' : 'basic';
   }
 
-  createNewItem(){
-    this.textData.add(this.newText);
+  handleItem() {
+    if (!this.isUpdate) {
+      this.textService.add(Object.assign({}, this.newText));
+    } else {
+      this.textService.update(Object.assign({}, this.newText));
+    }
+
     this.itemListService.update(6);
-    this.showSuccessToast();
+    this.showSuccessToast(this.isUpdate ? 'Item atualizado' : 'Item inserido');
   }
 
-  showSuccessToast() {
-    this.toastrService.show('Sua conta foi criada!',
+  removeItem(item: TextData) {
+    this.textService.delete(item.id);
+    this.itemListService.update(6);
+    this.showSuccessToast("Item removido!");
+    this.selected = null;
+  }
+
+  showSuccessToast(msg) {
+    this.toastrService.show(msg,
       'Sucesso!',
       {
         status: 'success',
-        position: <any> 'top-right',
-        duration: <any> '3000'
+        position: <any>'top-right',
+        duration: <any>'3000'
       });
   }
 
@@ -65,16 +90,16 @@ export class TextComponent implements OnInit {
       'Erro!',
       {
         status: 'danger',
-        position: <any> 'top-right',
-        duration: <any> '3000'
+        position: <any>'top-right',
+        duration: <any>'3000'
       });
   }
 
   public getName(email: string): string {
     return email.substring(0, email.indexOf("@"));
   }
-  
-  public showText(){
+
+  public showText() {
     this.showTxt = !this.showTxt;
   }
 

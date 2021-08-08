@@ -1,4 +1,4 @@
-<ion-row style="height: 50%;" >
+<ion-row style="height: 50%;min-height: 35vh;" >
 
   <ion-col *ngIf="selected != null">
     <div>
@@ -9,10 +9,10 @@
             Nome: {{selected.name}}
           </ion-col>
           <ion-col size="2">
-            <nb-icon icon="edit-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+            <nb-icon icon="edit-2-outline" (click)="open(dialog, selected)" status="primary" style="float: right; font-size: large;"></nb-icon>
           </ion-col>
           <ion-col size="2">
-            <nb-icon icon="trash-2-outline" status="primary" style="float: right; font-size: large;"></nb-icon>
+            <nb-icon icon="trash-2-outline" (click)="removeItem(selected)" status="primary" style="float: right; font-size: large;"></nb-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -122,16 +122,16 @@
 </ion-row>
 
 
-<button nbButton fullWidth outline status="primary" size="small" style="font-size: 10px;" (click)="open(dialog)">
+<button nbButton fullWidth outline status="primary" size="small" style="font-size: 10px;" (click)="open(dialog, null)">
   <nb-icon icon="plus-outline" status="primary">
   </nb-icon>
   Adicionar novo
 </button>
 
 <ng-template #dialog let-data let-ref="dialogRef">
-  <form [formGroup]="newItem" (ngSubmit)="createNewItem(); ref.close()">
+  <form [formGroup]="newItem" (ngSubmit)="handleItem(); ref.close()">
     <nb-card style="max-width: 95vw; max-height: 95vh">
-      <nb-card-header>Novo cartão de credito</nb-card-header>
+      <nb-card-header>{{isUpdate? "Editar cartão de credito":"Nova cartão de credito" }}</nb-card-header>
       <nb-card-body>
 
         <ion-grid style="width: 100%; padding: 0px">
@@ -155,8 +155,12 @@
           <ion-row>
             <ion-col>
               <div class="label">Tipo do cartão</div>
-              <input type="number" [(ngModel)]="newCredit.cardType" nbInput fullWidth formControlName="cardType"
-                status="{{getInputStatus('cardType')}}">
+
+              <nb-select placeholder="Selecione um tipo" fullWidth [(selected)]="newCredit.cardType" formControlName="cardType" status="{{getInputStatus('cardType')}}">
+                <nb-option value="0">Debito</nb-option>
+                <nb-option value="1">Credito</nb-option>
+              </nb-select>
+
             </ion-col>
           </ion-row>
 
@@ -168,18 +172,20 @@
             </ion-col>
           </ion-row>
 
-
           <ion-row>
             <ion-col>
               <div class="label">senha</div>
+
               <nb-form-field>
-                <input [type]="getInputType()" [(ngModel)]="newCredit.cardPassword" fullWidth nbInput
+                <input [type]="getInputPassType()" [(ngModel)]="newCredit.cardPassword" fullWidth nbInput
                   formControlName="password" status="{{getInputStatus('password')}}">
-                <button nbSuffix nbButton ghost (click)="showNewPass = !showNewPass">
+
+                <button type="button" nbSuffix nbButton ghost (click)="showNewPass = !showNewPass">
                   <nb-icon [icon]="showNewPass ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
                     [attr.aria-label]="showNewPass ? 'hide password' : 'show password'">
                   </nb-icon>
                 </button>
+
                 <password-strength-meter [password]="newCredit.cardPassword"></password-strength-meter>
               </nb-form-field>
 
@@ -188,15 +194,18 @@
 
           <ion-row>
             <ion-col>
-              <div class="label">senha</div>
+              <div class="label">cvv</div>
+
               <nb-form-field>
-                <input [type]="getInputType()" [(ngModel)]="newCredit.securityNumber" fullWidth nbInput
+                <input [type]="getInputCodeType()" [(ngModel)]="newCredit.securityNumber" fullWidth nbInput
                   formControlName="securityNumber" status="{{getInputStatus('securityNumber')}}">
-                <button nbSuffix nbButton ghost (click)="showNewPass = !showNewPass">
+
+                <button type="button" nbSuffix nbButton ghost (click)="showNewCode = !showNewCode">
                   <nb-icon [icon]="showNewCode ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
                     [attr.aria-label]="showNewCode ? 'hide password' : 'show password'">
                   </nb-icon>
                 </button>
+
               </nb-form-field>
 
             </ion-col>

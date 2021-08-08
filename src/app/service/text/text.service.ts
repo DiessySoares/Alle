@@ -53,7 +53,7 @@ export class TextService {
   }
 
   getAll() {
-    if (this.authService.isAuthenticated() && !this.locked) {
+    if (this.authService.isAuthenticated()) {
       return this.authService.currentUser().textData;
     }
     return null;

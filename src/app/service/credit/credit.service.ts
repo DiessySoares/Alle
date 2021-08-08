@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CreditCardData } from 'src/app/models/credit-card-data';
+import { CreditCardData } from './../../models/credit-card-data';
 import { AesService } from '../aes/aes.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -69,7 +69,7 @@ export class CreditService {
   }
 
   getAll() {
-    if (this.authService.isAuthenticated() && !this.locked) {
+    if (this.authService.isAuthenticated()) {
       return this.authService.currentUser().creditCard;
     }
     return null;

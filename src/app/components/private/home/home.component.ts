@@ -45,15 +45,29 @@ export class HomeComponent implements OnInit {
     this.fakeData();
   }
 
+   ionViewWillEnter(){
+    this.getUsage();
+   }
+
   private fakeData() {
     this.types = [
-      { idType: 1, typ_name: 'Wifi', typ_icon: 'wifi-outline' },
-      { idType: 2, typ_name: 'Web page', typ_icon: 'browser-outline' },
-      { idType: 3, typ_name: 'Banking', typ_icon: 'credit-card-outline' },
-      { idType: 4, typ_name: 'Email', typ_icon: 'email-outline' },
-      { idType: 5, typ_name: 'Aplicação', typ_icon: 'layout-outline' },
-      { idType: 6, typ_name: 'Texto', typ_icon: 'file-text-outline' },
+      { idType: 1, typ_name: 'Wifi', typ_icon: 'wifi-outline', size: 0},
+      { idType: 2, typ_name: 'Web page', typ_icon: 'browser-outline', size: 0 },
+      { idType: 3, typ_name: 'Banking', typ_icon: 'credit-card-outline', size: 0 },
+      { idType: 4, typ_name: 'Email', typ_icon: 'email-outline', size: 0 },
+      { idType: 5, typ_name: 'Aplicação', typ_icon: 'layout-outline', size: 0 },
+      { idType: 6, typ_name: 'Texto', typ_icon: 'file-text-outline', size: 0 },
     ]
+  }
+
+  private getUsage(){
+
+    this.types[0].size = this.wifiService.getAll().length;
+    this.types[1].size = this.webpageService.getAll().length;
+    this.types[2].size = this.creditService.getAll().length;
+    this.types[3].size = this.emailService.getAll().length;
+    this.types[4].size = this.applicationService.getAll().length;
+    this.types[5].size = this.textService.getAll().length;
   }
 
 

@@ -2,9 +2,9 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, NavController } from '@ionic/angular';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
-import { EmailData } from 'src/app/models/email-data';
-import { EmailService } from 'src/app/service/email/email.service';
-import { ItemListService } from 'src/app/service/item-list/item-list.service';
+import { EmailData } from './../../../../models/email-data';
+import { EmailService } from './../../../../service/email/email.service';
+import { ItemListService } from './../../../../service/item-list/item-list.service';
 
 @Component({
   selector: 'app-email',
@@ -18,6 +18,8 @@ export class EmailComponent implements OnInit {
 
   showPasswod: boolean = false;
   showNewKey: boolean = false;
+
+  isUpdate = false;
   
   public newItem: FormGroup;
 
@@ -42,9 +44,29 @@ export class EmailComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
+
+  open(dialog: TemplateRef<any>, updateObject) {
+    this.newItem.reset();
+
+    if(updateObject == null) {
+      this.newEmail = {} as EmailData;
+      this.isUpdate = false;
+    } else {
+      this.newEmail = updateObject;
+      this.isUpdate = true;
+    }
+
     this.dialogService.open(dialog);
   }
+
+  removeItem(item: EmailData){
+    this.emailService.delete(item.id);
+    this.itemListService.update(4);
+    this.showSuccessToast("Item removido!");
+    this.selected = null;
+  }
+
+
 
   getInputStatus(formItem: string) {
     return this.newItem.controls[formItem].dirty && this.newItem.controls[formItem].invalid ? 'danger' : 'basic';
@@ -57,14 +79,20 @@ export class EmailComponent implements OnInit {
     return 'password';
   }
 
-  createNewItem(){
-    this.emailService.add(this.newEmail);
-    this.itemListService.update(4);
-    this.showSuccessToast();
-  }
+  handleItem(){
+    if(!this.isUpdate) {
+      this.newEmail.name = this.getName(this.newEmail.email);
+      this.emailService.add(Object.assign({}, this.newEmail));
+    } else {
+      this.emailService.update(Object.assign({}, this.newEmail));
+    }
 
-  showSuccessToast() {
-    this.toastrService.show('Sua conta foi criada!',
+    this.itemListService.update(4);
+    this.showSuccessToast(this.isUpdate? 'Item atualizado' : 'Item inserido');
+}
+
+  showSuccessToast(msg) {
+    this.toastrService.show(msg,
       'Sucesso!',
       {
         status: 'success',

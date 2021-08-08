@@ -61,7 +61,7 @@ export class WifiService {
   }
 
   getAll() {
-    if (this.authService.isAuthenticated() && !this.locked) {
+    if (this.authService.isAuthenticated()) {
       return this.authService.currentUser().wifiData;
     }
     return null;

@@ -61,7 +61,7 @@ export class WebpageService {
   }
 
   getAll() {
-    if (this.authService.isAuthenticated() && !this.locked) {
+    if (this.authService.isAuthenticated()) {
       return this.authService.currentUser().webData;
     }
     return null;
