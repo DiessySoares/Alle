@@ -51,6 +51,7 @@ npm uninstall -g ionic
 npm cache clean -f
 npm install npm -g
 npm install -g @ionic/cli
+ionic cap sync
 ```
 
 e por fim execute novamente 
