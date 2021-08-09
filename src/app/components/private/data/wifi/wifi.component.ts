@@ -38,7 +38,7 @@ export class WifiComponent implements OnInit {
   private initForms() {
     this.newItem = this.formBuider.group({
       name: ['', Validators.required],
-      user: ['', Validators.required],
+      user: [''],
       password: ['', Validators.required],
       connectionType: [''],
       authenticationMethod: [''],

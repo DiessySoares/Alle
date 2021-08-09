@@ -53,6 +53,7 @@
  */
 
 import './zone-flags';
+import 'globalthis/auto';
 
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.

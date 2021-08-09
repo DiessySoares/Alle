@@ -66,8 +66,6 @@ export class EmailComponent implements OnInit {
     this.selected = null;
   }
 
-
-
   getInputStatus(formItem: string) {
     return this.newItem.controls[formItem].dirty && this.newItem.controls[formItem].invalid ? 'danger' : 'basic';
   }

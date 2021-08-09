@@ -16,15 +16,20 @@ export class LoginComponent implements OnInit {
   public password = "";
 
   public loginForm: FormGroup;
+  
+
 
   constructor(private formBuider: FormBuilder, private authService: AuthService) { }
 
   ngOnInit() { 
     this.initForms();
+
   }
 
   public login(){
-    this.authService.login(this.username, this.password);
+ 
+      this.authService.login(this.username, this.password);
+
   }
 
   getInputType() {
@@ -44,5 +49,7 @@ export class LoginComponent implements OnInit {
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
+
+ 
 
 }

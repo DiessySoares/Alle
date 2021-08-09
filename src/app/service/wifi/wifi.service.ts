@@ -53,10 +53,24 @@ export class WifiService {
     }
   }
 
-  add(web: WifiData) {
+  resolveOpFields(wifi: WifiData){
+    if(wifi.authenticationMethod == undefined) {
+      wifi.authenticationMethod = null;
+    }
+    if(wifi.connectionType == undefined) {
+      wifi.connectionType = null;
+    }
+    if(wifi.user == undefined) {
+      wifi.user = null;
+    }
+    return wifi;
+  }
+
+
+  add(wifi: WifiData) {
     if (this.authService.isAuthenticated() && !this.locked) {
-      web.id = this.authService.currentUser().wifiData.length + 1;
-      this.authService.currentUser().wifiData.push(web);
+      wifi.id = this.authService.currentUser().wifiData.length + 1;
+      this.authService.currentUser().wifiData.push(wifi);
     }
   }
 

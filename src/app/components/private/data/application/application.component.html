@@ -28,7 +28,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row><!-- password/key -->
+      <ion-row *ngIf="canActivate(selected.password)"><!-- password/key -->
         <ion-col size="4" class="bottom">
           Senha:
         </ion-col>

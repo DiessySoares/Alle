@@ -5,6 +5,8 @@ import { NbToastrService } from '@nebular/theme';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/service/user/user.service';
 
+
+
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -94,5 +96,7 @@ export class CreateAccountComponent implements OnInit {
     this.newUser = {} as User;
     this.router.navigate(['login']);
   }
+
+
 
 }

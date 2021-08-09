@@ -82,6 +82,9 @@ export class UserService {
 
   updateUser(user: User) {
     user.updated_at = new Date();
+
+    console.log(user);
+
     return this.firestore
       .collection(this.collectionName)
       .doc(user.id)

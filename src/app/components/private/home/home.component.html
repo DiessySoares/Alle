@@ -2,34 +2,32 @@
   <ion-grid style="height: 100%; margin: 0px;">
 
 
-    <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%;">
+    <ion-grid style="width: 100%; padding-bottom: 10%;padding-top: 5%;">
         <ion-row>
           <ion-col style="text-align: center;">
-            HOME
+            <h6>ALLE</h6>
+            <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
           </ion-col>
         </ion-row>
     </ion-grid>
     
-
-
-
     <ion-row *ngFor="let number of [0, 1, 2];index as i">
 
       <ion-col *ngFor="let innernumber of [0, 1];index as j;">
 
-        <nb-card style="margin-bottom: 5px; background-color: #121212;">
+        <nb-card style="margin-bottom: 5px; ">
           <nb-card-body style="padding: 1vh;">
 
 
-            <ion-grid style=" width: 100%; ">
+            <ion-grid style=" width: 100%; padding: 0px; color: rgb(145, 145, 145);">
               <ion-row>
 
-                <ion-col size="10">
+                <ion-col size="10" style="padding: 0px;">
                   <div class="subtitle" style="font-size: 12px;">{{types[i + i + j].typ_name}}</div>
                 </ion-col>
 
-                <ion-col size="2">
-                  <nb-icon style="font-size: 7vw; float: right;" icon="{{types[i + i + j].typ_icon}}" status="basic">
+                <ion-col size="2" style="padding: 0px;">
+                  <nb-icon style="font-size: 7vw; float: right;" icon="{{types[i + i + j].typ_icon}}" status="primary">
                   </nb-icon>
                 </ion-col>
 
@@ -37,7 +35,7 @@
 
               <ion-row>
 
-                <ion-col style="font-size: small;">
+                <ion-col style="font-size: small;padding: 0px;">
                   {{types[i + i + j].size}} Itens
                 </ion-col>
 
@@ -51,8 +49,6 @@
       </ion-col>
 
     </ion-row>
-
-
 
 
   </ion-grid>
@@ -87,16 +83,19 @@
 
         <ion-col>
 
-          <button (click)="sair()" outline nbButton status="basic" size="tiny" style="float: left">
+          <button (click)="sair(true)" outline nbButton status="basic" size="tiny" style="float: left">
             <nb-icon icon="log-out-outline" status="danger"></nb-icon>Salvar e sair
           </button>
 
         </ion-col>
 
 
-        <ion-col>
+         
 
-          <nb-icon icon="settings-outline" style="float: right; font-size: 6vw"></nb-icon>
+        <ion-col>
+          <button (click)="sair(false)" outline nbButton status="basic" size="tiny" style="float: right">
+            <nb-icon icon="log-out-outline" status="danger"></nb-icon>Sair
+          </button>
         </ion-col>
 
       </ion-row>

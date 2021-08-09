@@ -21,10 +21,10 @@ export class AuthService {
 
         if(this.userService.exist(username)) {
 
-            this.digestMessage(password).then(passSHA256 => {
+            this.digestMessage(password).then(passSHA512 => {
                 this.userLoggedIn = this.userService.users.find(x => x.name == username);
 
-                if(this.userLoggedIn.passwordSHA512 == passSHA256) {
+                if(this.userLoggedIn.passwordSHA512 == passSHA512) {
                     this.passwordSession = password;
                     this.router.navigate(['home']);
                 } else {

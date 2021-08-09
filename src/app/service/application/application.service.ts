@@ -64,7 +64,22 @@ export class ApplicationService {
     }
   }
 
+  resolveOpFields(app: AppData){
+    if(app.version == undefined) {
+      app.version = null;
+    }
+    if(app.password == undefined) {
+      app.password = null;
+    }
+    if(app.activationCode == undefined) {
+      app.activationCode = null;
+    }
+    return app;
+  }
+
+
   add(app: AppData) {
+    app = this.resolveOpFields(app);
     if (this.authService.isAuthenticated() && !this.locked) {
       app.id = this.authService.currentUser().aplication.length + 1;
       this.authService.currentUser().aplication.push(app);
@@ -85,11 +100,14 @@ export class ApplicationService {
     return null;
   }
 
-  update(newApp: AppData) {
+  update(app: AppData) {
+
+    app = this.resolveOpFields(app);
+
     if (this.authService.isAuthenticated() && !this.locked) {
       for (let i = 0; i < this.authService.currentUser().aplication.length; i++) {
-        if (this.authService.currentUser().aplication[i].id == newApp.id) {
-          this.authService.currentUser().aplication[i] = newApp;
+        if (this.authService.currentUser().aplication[i].id == app.id) {
+          this.authService.currentUser().aplication[i] = app;
         }
       }
     }

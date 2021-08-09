@@ -4,10 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ItemPageComponent } from './item-page.component'
 import { SharedModule } from '../../shared-module/shared-module.module';
 
-
 import { RouterModule } from '@angular/router';
-
-
 
 // [CHILD-COMPONENT]
 import { WifiComponent } from './../data/wifi/wifi.component'

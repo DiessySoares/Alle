@@ -42,14 +42,14 @@ export class HomeComponent implements OnInit {
   indexHtml = 0
 
   ngOnInit() {
-    this.fakeData();
+    this.typesLoad();
   }
 
    ionViewWillEnter(){
     this.getUsage();
    }
 
-  private fakeData() {
+  private typesLoad() {
     this.types = [
       { idType: 1, typ_name: 'Wifi', typ_icon: 'wifi-outline', size: 0},
       { idType: 2, typ_name: 'Web page', typ_icon: 'browser-outline', size: 0 },
@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
   }
 
   private getUsage(){
-
     this.types[0].size = this.wifiService.getAll().length;
     this.types[1].size = this.webpageService.getAll().length;
     this.types[2].size = this.creditService.getAll().length;
@@ -75,28 +74,30 @@ export class HomeComponent implements OnInit {
     this.selected = selected;
   }
 
-  search() { }
+  sair(salvar: boolean) {
 
-
-  sair() {
-    /*
-      Com isso agora é ilegal eu usar Angular em 80 paises, obrigado!
-    */
-    this.applicationService.lock().then(() => {
-      this.creditService.lock().then(() => {
-        this.emailService.lock().then(() => {
-          this.textService.lock().then(() => {
-            this.webpageService.lock().then(() => {
-              this.wifiService.lock().then(() => {
-                this.userService.updateUser(this.authService.currentUser()).then(done => {
-                  this.authService.logout();
+    if(salvar) {
+      /*
+        Com isso agora é ilegal eu usar Angular em 80 paises, obrigado!
+      */
+      this.applicationService.lock().then(() => {
+        this.creditService.lock().then(() => {
+          this.emailService.lock().then(() => {
+            this.textService.lock().then(() => {
+              this.webpageService.lock().then(() => {
+                this.wifiService.lock().then(() => {
+                  this.userService.updateUser(this.authService.currentUser()).then(done => {
+                    this.authService.logout();
+                  })
                 })
               })
             })
           })
         })
       })
-    })
+    } else {
+        this.authService.logout();
+    }
   }
 
 }

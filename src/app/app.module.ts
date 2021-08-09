@@ -27,6 +27,8 @@ import { environment } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
+import { SpeedTestModule } from 'ng-speed-test';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     HttpClientModule,
+    SpeedTestModule,
     
     PasswordStrengthMeterModule,
 

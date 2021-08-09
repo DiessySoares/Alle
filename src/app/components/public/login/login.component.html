@@ -2,9 +2,17 @@
 
     <ion-grid style="width: 100%;">
 
+        <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%;">
+            <ion-row>
+              <ion-col style="text-align: center;">
+                <h6>ALLE</h6>
+                <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
 
 
-        <form [formGroup]="loginForm" (ngSubmit)="login()" style="padding-top: 40%;">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" style="padding-top: 20%;">
             <ion-row>
                 <ion-col>
                     <div class="label">usuario</div>
@@ -39,7 +47,7 @@
 </ion-content>
 
     <ion-footer>
-        <div class="footer">
+        <div class="footer" >
             Não tem uma conta? <a routerLink="/create-account">Crie uma</a>
         </div>
     </ion-footer>
