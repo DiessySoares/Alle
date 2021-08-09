@@ -41,5 +41,21 @@ ionic serve
 Na pasta do projeto execute o comando no terminal
 
 ```
-ionic capacitor run android
+ionic capacitor build android
 ```
+Caso o erro "Unable to find command: capacitor build" sejá apresentando use esses comandos
+
+```
+npm uninstall -g capacitor
+npm uninstall -g ionic
+npm cache clean -f
+npm install npm -g
+npm install -g @ionic/cli
+```
+
+e por fim execute novamente 
+
+```
+ionic capacitor build android
+```
+
