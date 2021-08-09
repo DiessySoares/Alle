@@ -41,5 +41,5 @@ ionic serve
 Na pasta do projeto execute o comando no terminal
 
 ```
-ionic capacitor build android
+ionic capacitor run android
 ```
