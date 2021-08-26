@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Type } from 'src/app/models/type';
-
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Type } from './../../../models/type';
 import { ApplicationService } from './../../../service/application/application.service'
 import { CreditService } from './../../../service/credit/credit.service'
 import { EmailService } from './../../../service/email/email.service'
 import { TextService } from './../../../service/text/text.service'
 import { WebpageService } from './../../../service/webpage/webpage.service'
 import { WifiService } from './../../../service/wifi/wifi.service'
-
 import { UserService } from './../../../service/user/user.service'
 import { AuthService } from './../../../service/auth/auth.service'
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,12 +18,20 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  querry = "";
-  searchArray: any[] = [];
+
+  options: any[];
+  filteredOptions$: Observable<any[]>;
+
+
+
+  //querry = "";
+  //searchArray: any[] = [];
 
   public selected;
 
   types: Type[] = [];
+
+  @ViewChild('autoInput') input;
 
   constructor(
     private applicationService: ApplicationService,

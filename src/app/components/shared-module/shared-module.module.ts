@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
+  NbAutocompleteModule,
   NbButtonModule,
   NbCardModule,
+  NbCheckboxModule,
   NbFormFieldModule,
   NbIconModule,
   NbInputModule,
   NbListModule,
-  NbSelectModule
+  NbSelectModule,
+  NbToggleModule
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -24,13 +27,16 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
   exports: [
     IonicModule,
     RouterModule,
+    NbToggleModule,
 
     NbButtonModule,
     NbCardModule,
     NbInputModule,
     NbFormFieldModule,
+    NbToggleModule,
     NbListModule,
     NbSelectModule,
+    NbAutocompleteModule,
 
     PasswordStrengthMeterModule,
 

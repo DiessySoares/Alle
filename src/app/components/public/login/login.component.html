@@ -2,12 +2,12 @@
 
     <ion-grid style="width: 100%;">
 
-        <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%;">
+        <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 10%; max-height: 120px;">
             <ion-row>
-              <ion-col style="text-align: center;">
-                <h6>ALLE</h6>
-                <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
-              </ion-col>
+                <ion-col style="text-align: center;">
+                    <ion-img src="assets/icon/alle.png" style="filter: invert(1); height: 40%;"></ion-img>
+                    <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
+                </ion-col>
             </ion-row>
         </ion-grid>
 
@@ -36,18 +36,36 @@
                 </ion-col>
             </ion-row>
 
-            <ion-row style="padding-top: 20%;">
+            <ion-row style="padding-top: 10%;">
                 <ion-col>
-                    <button nbButton fullWidth status="primary" (click)="login()" [disabled]="!loginForm.valid"
+                    <button nbButton fullWidth status="primary" [disabled]="!loginForm.valid && !useFingerCredential"
                         type="submit">Login</button>
                 </ion-col>
             </ion-row>
+
+            <ion-row style="padding-top: 20%;">
+                <ion-col style="padding-left: 45%;">
+                    <ion-img style="width: 20%; margin: 0px !important; filter: invert(1);"
+                        src="assets\icon\fingerprint.png"></ion-img>
+                </ion-col>
+            </ion-row>
+
+
+
         </form>
+
+        <ion-row>
+            <ion-col style="text-align: center;">
+                <input id="s1" type="checkbox" [(ngModel)]="useFingerCredential" [value]="useFingerCredential" (click)="setUseFingerCredential()" class="switch">
+            </ion-col>
+        </ion-row>
+
     </ion-grid>
 </ion-content>
 
-    <ion-footer>
-        <div class="footer" >
-            Não tem uma conta? <a routerLink="/create-account">Crie uma</a>
-        </div>
-    </ion-footer>
+
+<ion-footer>
+    <div class="footer">
+        Não tem uma conta? <a routerLink="/create-account">Crie uma</a>
+    </div>
+</ion-footer>

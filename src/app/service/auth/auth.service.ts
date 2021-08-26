@@ -17,13 +17,12 @@ export class AuthService {
     private userLoggedIn: User = null;
     private passwordSession: string = "";
 
-    public login(username: string, password: string) {
+    public login(username: string, password: string): boolean {
 
         if(this.userService.exist(username)) {
 
             this.digestMessage(password).then(passSHA512 => {
                 this.userLoggedIn = this.userService.users.find(x => x.name == username);
-
                 if(this.userLoggedIn.passwordSHA512 == passSHA512) {
                     this.passwordSession = password;
                     this.router.navigate(['home']);
@@ -36,6 +35,7 @@ export class AuthService {
                         duration: <any>'3000',
                         preventDuplicates: true
                     });
+                    return false;
                 }
             })
         } else {
@@ -46,8 +46,8 @@ export class AuthService {
                 duration: <any>'3000',
                 preventDuplicates: true
             });
+            return false;
         }
-
     }
 
     canActivate(): Observable<boolean> | boolean {

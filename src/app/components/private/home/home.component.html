@@ -2,15 +2,15 @@
   <ion-grid style="height: 100%; margin: 0px;">
 
 
-    <ion-grid style="width: 100%; padding-bottom: 10%;padding-top: 5%;">
-        <ion-row>
-          <ion-col style="text-align: center;">
-            <h6>ALLE</h6>
-            <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
-          </ion-col>
-        </ion-row>
+    <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%; max-height: 120px;">
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <ion-img src="assets/icon/alle.png" style="filter: invert(1); height: 40%;"></ion-img>
+          <div class="legenda">Gerente de senhas de nível militar (AES-256)</div>
+        </ion-col>
+      </ion-row>
     </ion-grid>
-    
+
     <ion-row *ngFor="let number of [0, 1, 2];index as i">
 
       <ion-col *ngFor="let innernumber of [0, 1];index as j;">
@@ -27,7 +27,7 @@
                 </ion-col>
 
                 <ion-col size="2" style="padding: 0px;">
-                  <nb-icon style="font-size: 7vw; float: right;" icon="{{types[i + i + j].typ_icon}}" status="primary">
+                  <nb-icon style="font-size: 7vw; float: right" icon="{{types[i + i + j].typ_icon}}" >
                   </nb-icon>
                 </ion-col>
 
@@ -90,7 +90,7 @@
         </ion-col>
 
 
-         
+
 
         <ion-col>
           <button (click)="sair(false)" outline nbButton status="basic" size="tiny" style="float: right">

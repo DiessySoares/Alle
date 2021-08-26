@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from 'src/app/models/user';
+import { User } from './../../models/user';
 import { NbToastrService } from '@nebular/theme';
 
 @Injectable({
@@ -82,9 +82,6 @@ export class UserService {
 
   updateUser(user: User) {
     user.updated_at = new Date();
-
-    console.log(user);
-
     return this.firestore
       .collection(this.collectionName)
       .doc(user.id)

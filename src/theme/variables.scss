@@ -284,4 +284,22 @@ ion-content {
   --overflow: hidden;
 }
 
+.nb-theme-dark .label {
+  font-weight: 100 !important;
+}
+
+
+.nb-theme-dark [nbInput].status-basic {
+  background-color: #192038;
+  border-color: #27262b;
+  color: #fff;
+}
+
+.nb-theme-dark nb-card {
+  background-color: #141c2f;
+}
+
+
+
+
 //#151a30

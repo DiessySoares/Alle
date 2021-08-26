@@ -23,11 +23,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { environment } from "src/environments/environment";
+import { environment } from "./../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
-import { SpeedTestModule } from 'ng-speed-test';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { SpeedTestModule } from 'ng-speed-test';
     BrowserAnimationsModule,
     IonicModule.forRoot(),
     HttpClientModule,
-    SpeedTestModule,
+
+    IonicStorageModule.forRoot(),
     
     PasswordStrengthMeterModule,
 
@@ -69,6 +72,7 @@ import { SpeedTestModule } from 'ng-speed-test';
     AppRoutingModule
   ],
   providers: [
+    FingerprintAIO,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
