@@ -1,8 +1,23 @@
 <ion-content>
-  <ion-grid style="height: 100%; margin: 0px;">
+  <ion-grid style="height: 100%; margin: 0px;padding: 0px;">
 
 
-    <ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%; max-height: 120px;">
+    <ion-card class="myCard" style="padding: 0px;margin: 0px">
+      <img src="assets/image/hacker-man-on-laptop.jpg" style="filter: blur(3px) brightness(0.6);"/>
+      <div class="myOverlay">
+
+        <div class="CardTitle"> <span>ALLE SAFE KEEPER - {{userName}}</span></div>
+        <h1 class="CardSubtitle">PROTEÇÃO DE NÍVEL MILITAR</h1>
+        <div class="CardText">
+          Alle usa a criptografia Advanced Encryption Standard (AES-256) para proteger seus dados, 
+          todos os dados criptografados e descriptografados pelo seu proprio smarthphone, o servidor
+          so armazena eles para voce :).
+        </div>
+      </div>
+    </ion-card>
+
+
+    <!--ion-grid style="width: 100%; padding-bottom: 5%;padding-top: 5%; max-height: 120px;">
       <ion-row>
         <ion-col style="text-align: center;">
           <ion-img src="assets/icon/alle.png" style="filter: invert(1); height: 40%;"></ion-img>
@@ -48,7 +63,7 @@
 
       </ion-col>
 
-    </ion-row>
+    </ion-row-->
 
 
   </ion-grid>
@@ -66,9 +81,11 @@
           <div [routerLink]="['/item-page', (i + j + j) + 1]">
             <nb-icon style="font-size: 10vw" icon="{{types[i + j + j].typ_icon}}"
               [options]="{ animation: { type: 'pulse' } }" status="primary"></nb-icon>
+              <nb-badge text="{{types[i + j + j].size}}" style="right: unset;top:unset;padding: 4px;"></nb-badge>
             <div style="font-size: 12px;">{{types[i + j + j].typ_name}}</div>
           </div>
         </div>
+
 
       </div>
     </div>

@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component'
 import { SharedModule } from '../../shared-module/shared-module.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NbBadgeModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     SharedModule,
     FormsModule,
+    NbBadgeModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ]
 })

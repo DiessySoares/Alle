@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   options: any[];
   filteredOptions$: Observable<any[]>;
-
+  userName = "";
 
 
   //querry = "";
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.typesLoad();
+    this.userName = this.authService.currentUser().name;
   }
 
    ionViewWillEnter(){

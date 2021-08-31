@@ -25,7 +25,7 @@
 }
 
 .cell-1 {
-    margin: 5%;
+    margin: 7%;
 }
 
 .name {
@@ -52,3 +52,56 @@ ion-item-divider {
 title {
     text-align: center;
 }
+
+
+
+
+
+
+img{
+    width:100%;
+    height:100%;
+  }
+  
+  .myCard{
+    position:relative;
+    height: 100%;
+  }
+  
+  .myOverlay{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 99;
+      bottom: 0px;
+
+  }
+
+
+  .myOverlay .card-title{
+    color: white;
+    background-color: blue;
+}
+
+
+.CardTitle {
+    color: white;
+    padding-top: 20%;
+    padding-left: 10%;
+}
+
+
+.CardSubtitle {
+    font-size: 18px;
+    padding-left: 10%;
+}
+
+.CardText {
+    color: white;
+    font-size: 12px;
+    padding-left: 10%;
+    text-align: justify;
+    padding-right: 10%;
+}
+
+.CardTitle >span {background-color:#162d75;line-height:2;padding: 8px;font-size: 12px;}
