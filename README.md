@@ -1,5 +1,13 @@
 # Alle
 
+## Screenshots 
+
+![localhost_8100_(Moto G4)](https://user-images.githubusercontent.com/49379112/141329841-a251e23c-5a27-49b2-b901-aeeefd679b31.png)
+![localhost_8100_(Moto G4) (1)](https://user-images.githubusercontent.com/49379112/141329869-b5243044-b82f-40b4-beae-a673d34ace61.png)
+![localhost_8100_(Moto G4) (2)](https://user-images.githubusercontent.com/49379112/141329876-05194a98-37f6-4e6a-92a2-690d84222323.png)
+![localhost_8100_(Moto G4) (3)](https://user-images.githubusercontent.com/49379112/141329888-9f655e55-8ee8-4691-8e26-2025ec88f5f9.png)
+![localhost_8100_(Moto G4) (4)](https://user-images.githubusercontent.com/49379112/141329897-4b7b3653-3ec3-4093-9121-0f133611c920.png)
+
 ## Dependencias 
 
 Node 16+
@@ -59,4 +67,6 @@ e por fim execute novamente
 ```
 ionic capacitor build android
 ```
+
+(trabalho da faculdade)
 
